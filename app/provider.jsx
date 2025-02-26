@@ -5,10 +5,12 @@ import { useEffect,useState} from 'react'
 import {useUser} from '@clerk/nextjs'
 import axios from 'axios'
 import { UserDetailContext } from './_context/UserDetailContext'
+import { VideoFrameContext } from './_context/VideoFramesContext'
 
 const Provider = ({children}) => {
     const {user} = useUser();
-    const [userDetail,setUserDetail]= useState();
+    const [userDetail,setUserDetail]= useState([]);
+    const [videoFrames, setVideoFrames] = useState([]);
     useEffect(()=>{
         user&&saveUserInfo();
     },[user]);
@@ -23,7 +25,9 @@ const Provider = ({children}) => {
   return (
     <div>
       <UserDetailContext.Provider value={{userDetail,setUserDetail}}>
-      {children}
+        <VideoFrameContext.Provider value={{videoFrames, setVideoFrames}}>
+        {children}
+        </VideoFrameContext.Provider>
       </UserDetailContext.Provider>
     </div>
   )

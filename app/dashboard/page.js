@@ -1,37 +1,20 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import VideoCreateOption from "./_components/VideoCreateOption";
 
 const Dashboard = () => {
+  const [videoList,setVideoList] = useState([]);
   return (
-    <div className="p-10">
+    <div className="p-5 bg-gray-50 min-h-screen">
       {/* Page Header */}
-      <h2 className="text-4xl font-extrabold text-center mb-8">Dashboard</h2>
-      
-      {/* Options Section */}
-      <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-        {/* AI Generation Option */}
-        <Link href={"/create-ai-video"} className="w-full md:w-1/3">
-          <div className="border rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300 hover:bg-gray-100 text-center cursor-pointer flex flex-col items-center h-[40vh]">
-            <Image src={"/magic.jpg"} alt="magic" width={80} height={80} className="mb-4" />
-            <h2 className="text-xl font-semibold text-gray-800">Generate with AI</h2>
-            <p className="text-sm text-gray-600 mt-2">
-              Use AI tools to create amazing videos with ease.
-            </p>
-          </div>
-        </Link>
+      <h2 className="text-5xl font-bold text-center text-gray-800 mb-8">
+        Welcome to Your Dashboard
+      </h2>
 
-        {/* Video Editing Option */}
-        <Link href={"/editor"} className="w-full md:w-1/3">
-          <div className="border rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300 hover:bg-gray-100 text-center cursor-pointer flex flex-col items-center h-[40vh]">
-            <Image src={"/video-editing.png"} alt="edit" width={80} height={80} className="mb-4" />
-            <h2 className="text-xl font-semibold text-gray-800">Create from Scratch</h2>
-            <p className="text-sm text-gray-600 mt-2">
-              Build custom videos with our editing tools.
-            </p>
-          </div>
-        </Link>
-      </div>
+      {/* Options Section */}
+      {videoList.length==0 && <VideoCreateOption/>}
     </div>
   );
 };
