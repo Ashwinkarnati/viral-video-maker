@@ -29,6 +29,9 @@ const RemotionPlayer = () => {
         }
         playRef?.current?.seekTo(skipDuration*30);
       }
+      if(videoFrames?.selectedFrame == 0){
+        playRef?.current?.seekTo(0);
+      }
     },[videoFrames?.selectedFrame])
   return (
     <div>

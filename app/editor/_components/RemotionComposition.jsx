@@ -13,7 +13,7 @@ const RemotionComposition = ({frameList}) => {
           frameList.map((frame,index)=>{
             const fromFrame = index ==0?0:trackFrame
             trackFrame = trackFrame + frame.duration * 30
-            const duration = frame.duration *30
+            const duration = frame.duration * 30
             return(
               <Sequence key={index} from={fromFrame} durationInFrames={duration}>
                 <h2 style={{color:'white',
