@@ -18,27 +18,27 @@ const RemotionComposition = ({ frameList }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: 'black' }}>
-      {
-        frameList.map((frame, index) => {
-          const fromFrame = index === 0 ? 0 : trackFrame;
-          trackFrame = trackFrame + frame.duration * 30;
-          const duration = frame.duration * 30;
-          return (
-            <Sequence key={index} from={fromFrame} durationInFrames={duration}>
-              <h2 style={{
-                color: frame?.textColor,
-                fontSize: frame?.fontSize,
-                fontFamily: frame?.fontFamily || "bungee", // Use the selected font family
-                transform: `translateX(${width / 2 - 30}px) translateY(${height / 2 - 30}px)`
-              }}>
-                <AbsoluteFill>
-                  {frame.text}
-                </AbsoluteFill>
+      {frameList.map((frame, index) => {
+        const fromFrame = index === 0 ? 0 : trackFrame;
+        trackFrame = trackFrame + frame.duration * 30;
+        const duration = frame.duration * 30;
+        return (
+          <Sequence key={index} from={fromFrame} durationInFrames={duration}>
+            <AbsoluteFill style={{ background: frame.bgColor || "#ffffff" }}>
+              <h2
+                style={{
+                  color: frame?.textColor,
+                  fontSize: frame?.fontSize,
+                  fontFamily: frame?.fontFamily || "bungee",
+                  transform: `translateX(${width / 2 - 30}px) translateY(${height / 2 - 30}px)`,
+                }}
+              >
+                {frame.text}
               </h2>
-            </Sequence>
-          );
-        })
-      }
+            </AbsoluteFill>
+          </Sequence>
+        );
+      })}
     </AbsoluteFill>
   );
 };

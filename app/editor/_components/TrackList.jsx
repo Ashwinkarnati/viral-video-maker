@@ -12,7 +12,8 @@ const defaultFrame = {
   textColor: 'black',
   fontSize: 20,
   duration: 2,
-  fontFamily: 'bungee'
+  fontFamily: 'bungee',
+  bgColor: '#ffffff'
 };
 
 const TrackList = () => {
