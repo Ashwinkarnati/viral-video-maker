@@ -13,7 +13,8 @@ const defaultFrame = {
   fontSize: 20,
   duration: 2,
   fontFamily: 'bungee',
-  bgColor: '#ffffff'
+  bgColor: '#ffffff',
+  animation: 'zoomIn'
 };
 
 const TrackList = () => {
@@ -35,11 +36,12 @@ const TrackList = () => {
     frameList?.forEach((frame) => {
       totalDuration += frame.duration;
     });
-    frameList && setVideoFrames({
+    frameList && setVideoFrames(prev=>({
+      ...prev,
       totalDuration: totalDuration,
       frameList: frameList,
       selectedFrame: selectedFrame
-    });
+    }));
   }, [frameList, selectedFrame]);
 
   useEffect(() => {

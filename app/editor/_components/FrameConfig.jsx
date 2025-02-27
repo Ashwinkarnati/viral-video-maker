@@ -7,13 +7,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { LetterText, SwatchBook } from "lucide-react";
+import { Layers, LetterText, Smile, SwatchBook } from "lucide-react";
 import { VideoFrameContext } from "@/app/_context/VideoFramesContext";
 import SliderField from "./SliderField";
 import DropDown from "./DropDown";
-import { FontList } from "@/app/_data/List";
+import { AnimationList, FontList } from "@/app/_data/List";
 import ColorPickerField from "./ColorPickerField";
 import BackgroundField from "./BackgroundField";
+import EmojiField from "./EmojiField";
 
 const FrameConfig = () => {
   const { videoFrames, setVideoFrames } = useContext(VideoFrameContext);
@@ -101,6 +102,44 @@ const FrameConfig = () => {
             <BackgroundField
               defaultValue={frame.bgColor || "#ffffff"} // Default to white
               handleInputChange={(value) => handleInputChange("bgColor", value)}
+            />
+          </AccordionContent>
+        </AccordionItem>
+
+        {/* Animation Configuration */}
+        <AccordionItem value="animation">
+          <AccordionTrigger>
+            <span className="flex gap-2 text-lg items-center">
+              <Layers /> Animation
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <DropDown
+              defaultValue={frame?.animation}
+              label={"Text Animation"}
+              options={AnimationList}
+              handleChange={(value) => handleInputChange("animation", value)}
+            />
+          </AccordionContent>
+        </AccordionItem>
+
+        {/* Sticker Configuration */}
+        <AccordionItem value="sticker">
+          <AccordionTrigger>
+            <span className="flex gap-2 text-lg items-center">
+              <Smile /> Sticker
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            {/* Emoji Field */}
+            <EmojiField
+              handleInputChange={(value) => handleInputChange("sticker", value)}
+            />
+            {/* Sticker Size Slider */}
+            <SliderField
+              defaultValue={frame?.stickerSize || 50} // Default size is 50
+              label={"Sticker Size"}
+              handleInputChange={(value) => handleInputChange("stickerSize", value)}
             />
           </AccordionContent>
         </AccordionItem>

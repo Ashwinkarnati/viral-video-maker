@@ -1,23 +1,34 @@
 "use client";
-import React from 'react';
-import { AbsoluteFill, Sequence, useVideoConfig } from 'remotion';
-import * as bungee from '@remotion/google-fonts/Bungee';
-import * as anton from '@remotion/google-fonts/Anton';
-import * as parisienne from '@remotion/google-fonts/Parisienne';
-import * as pacifico from '@remotion/google-fonts/Pacifico';
+import React, { useContext } from "react";
+import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
+import * as bungee from "@remotion/google-fonts/Bungee";
+import * as anton from "@remotion/google-fonts/Anton";
+import * as parisienne from "@remotion/google-fonts/Parisienne";
+import * as pacifico from "@remotion/google-fonts/Pacifico";
+import * as outfit from "@remotion/google-fonts/Outfit";
+import * as rowdies from "@remotion/google-fonts/Rowdies";
+import * as permanent from "@remotion/google-fonts/PermanentMarker";
+import { TextAnimation } from "@/app/_data/Animations";
+import { useCurrentFrame } from "remotion";
+import { VideoFrameContext } from "@/app/_context/VideoFramesContext";
 
 const RemotionComposition = ({ frameList }) => {
   let trackFrame = 0;
-  const { width, height } = useVideoConfig();
+  const { videoFrames } = useContext(VideoFrameContext);
+  const { width, height, fps } = useVideoConfig();
+  const currentFrame = useCurrentFrame();
 
   // Load all fonts
   bungee.loadFont();
   anton.loadFont();
   parisienne.loadFont();
   pacifico.loadFont();
+  outfit.loadFont();
+  rowdies.loadFont();
+  permanent.loadFont();
 
   return (
-    <AbsoluteFill style={{ backgroundColor: 'black' }}>
+    <AbsoluteFill style={{ backgroundColor: "black" }}>
       {frameList.map((frame, index) => {
         const fromFrame = index === 0 ? 0 : trackFrame;
         trackFrame = trackFrame + frame.duration * 30;
@@ -25,12 +36,29 @@ const RemotionComposition = ({ frameList }) => {
         return (
           <Sequence key={index} from={fromFrame} durationInFrames={duration}>
             <AbsoluteFill style={{ background: frame.bgColor || "#ffffff" }}>
+              {/* Sticker */}
+              {frame?.sticker && (
+                <img
+                  src={frame.sticker}
+                  alt="emoji"
+                  width={frame?.stickerSize || 50} // Use stickerSize or default to 50
+                  height={frame?.stickerSize || 50} // Use stickerSize or default to 50
+                  style={{
+                    position: "absolute",
+                    top: "50%", // Center the emoji
+                    left: "50%", // Center the emoji
+                    transform: "translate(-50%, -50%)", // Center the emoji
+                  }}
+                />
+              )}
+              {/* Text */}
               <h2
                 style={{
                   color: frame?.textColor,
+                  textAlign: "center",
                   fontSize: frame?.fontSize,
                   fontFamily: frame?.fontFamily || "bungee",
-                  transform: `translateX(${width / 2 - 30}px) translateY(${height / 2 - 30}px)`,
+                  transform: `${TextAnimation(frame.animation, currentFrame, fps, fromFrame, width, height)}`,
                 }}
               >
                 {frame.text}
@@ -39,6 +67,11 @@ const RemotionComposition = ({ frameList }) => {
           </Sequence>
         );
       })}
+
+      {/* Render Audio only if videoFrames.music is defined */}
+      {videoFrames?.music && (
+        <Audio volume={0.5} src={staticFile(videoFrames.music)} />
+      )}
     </AbsoluteFill>
   );
 };
