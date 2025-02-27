@@ -4,13 +4,15 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import { VideoFrameContext } from '@/app/_context/VideoFramesContext';
+import { fontFamily } from '@remotion/google-fonts/Bungee';
 
 const defaultFrame = {
   image: '/footage.png',
   text: 'Hello World',
   textColor: 'black',
   fontSize: 20,
-  duration: 2
+  duration: 2,
+  fontFamily: 'bungee'
 };
 
 const TrackList = () => {
