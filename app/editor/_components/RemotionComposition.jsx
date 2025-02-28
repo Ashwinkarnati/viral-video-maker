@@ -41,13 +41,10 @@ const RemotionComposition = ({ frameList }) => {
                 <img
                   src={frame.sticker}
                   alt="emoji"
-                  width={frame?.stickerSize || 50} // Use stickerSize or default to 50
-                  height={frame?.stickerSize || 50} // Use stickerSize or default to 50
+                  width={frame?.stickerSize || 25} // Use stickerSize or default to 50
+                  height={frame?.stickerSize || 25} // Use stickerSize or default to 50
                   style={{
-                    position: "absolute",
-                    top: "50%", // Center the emoji
-                    left: "50%", // Center the emoji
-                    transform: "translate(-50%, -50%)", // Center the emoji
+                        transform: `translateX(${frame?.stickerPositionX}px) translateY(${frame?.stickerPositionY}px)`
                   }}
                 />
               )}

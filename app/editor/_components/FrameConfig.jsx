@@ -137,10 +137,21 @@ const FrameConfig = () => {
             />
             {/* Sticker Size Slider */}
             <SliderField
-              defaultValue={frame?.stickerSize || 50} // Default size is 50
+              defaultValue={frame?.stickerSize || 25}
               label={"Sticker Size"}
               handleInputChange={(value) => handleInputChange("stickerSize", value)}
             />
+            <div className="flex gap-5 w-full">
+              <SliderField label={'PositionX'}
+              defaultValue={frame?.stickerPositionX??'50'}
+              handleInputChange={(value)=>handleInputChange('stickerPositionX',value)}
+              max={500}/>
+
+              <SliderField label={'PositionY'}
+              defaultValue={frame?.stickerPositionY??'50'}
+              max={500}
+              handleInputChange={(value)=>handleInputChange('stickerPositionY',value)}/>
+            </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

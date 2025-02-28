@@ -26,8 +26,12 @@ export async function PUT(req){
 export async function GET(req){
     const {searchParams} = new URL(req.url);
     const videoId = searchParams.get('videoId');
+    const userEmail = searchParams.get('userEmail');
+    if (userEmail){
+        const result = await db.select().from(VIDEO_RAW_TABLE).where(eq(VIDEO_RAW_TABLE.createdBy,userEmail));
+        return NextResponse.json(result); 
+    }
     const result = await db.select().from(VIDEO_RAW_TABLE).where(eq(VIDEO_RAW_TABLE.videoId,videoId));
     console.log(result);
-
     return NextResponse.json(result[0]);
 }
