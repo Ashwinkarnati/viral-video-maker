@@ -9,8 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { v4 as uuidv4 } from 'uuid';
 
 function CreateButton() {
+  const videoId = uuidv4(); 
   return (
     <div>
       <Dialog>
@@ -34,7 +36,7 @@ function CreateButton() {
             </Link>
 
             {/* Video Editing Option */}
-            <Link href={"/editor"} className="w-full md:w-1/3">
+            <Link href={"/editor/"+videoId} className="w-full md:w-1/3">
               <div className="border rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300 hover:bg-gray-100 text-center cursor-pointer flex flex-col items-center h-[50vh]">
                 <Image src={"/video-editing.png"} alt="edit" width={80} height={80} className="mb-4" />
                 <h2 className="text-xl font-semibold text-gray-800">Create from Scratch</h2>

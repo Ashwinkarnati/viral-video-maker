@@ -24,11 +24,6 @@ const SideBar = () => {
       path: '/dashboard',
     },
     {
-      name: 'Buy Credits',
-      icon: Coins,
-      path: '/buy-credits',
-    },
-    {
       name: 'Profile',
       icon: UserCircle,
       path: '/dashboard/profile',
@@ -61,12 +56,6 @@ const SideBar = () => {
           );
         })}
       </ul>
-
-      <div className='p-4 border absolute bottom-10 font-bold rounded-2xl w-[60%] bg-red-200 ml-8 flex flex-col gap-2'>
-        <h2 className='text-center text-lg'>Total Usage </h2>
-        <Progress value={userDetail?.credits} />
-        <h4 className='text-red-900'>{10-userDetail?.credits} Min Used Out of 10 Min</h4>
-      </div>
     </div>
   );
 };

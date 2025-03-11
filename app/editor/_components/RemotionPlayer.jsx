@@ -50,7 +50,7 @@ const RemotionPlayer = () => {
           <Player
             ref={playRef}
             component={RemotionComposition}
-            durationInFrames={Number(videoFrames.totalDuration * 30)}
+            durationInFrames={Math.round(videoFrames.totalDuration * 30)}
             compositionWidth={screenSize.width}
             compositionHeight={screenSize.height}
             fps={30}
